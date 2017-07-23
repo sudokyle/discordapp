@@ -22,7 +22,6 @@ public class ClientFactory {
         ObjectMapper mapper = new ObjectMapper();
         Config config = mapper.readValue(new File("discordapp/src/config.json"), Config.class);
         String token = config.getToken();
-        System.out.print(token);
         ClientBuilder clientBuilder = new ClientBuilder(); // Creates the ClientBuilder instance
         clientBuilder.withToken(token); // Adds the login info to the builder
         try {
