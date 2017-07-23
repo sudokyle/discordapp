@@ -19,8 +19,8 @@ public class MessageHandler {
 	@EventSubscriber
 	public void OnMesageEvent(MessageReceivedEvent event) throws DiscordException, MissingPermissionsException{
 		IMessage message = event.getMessage();
-		if(message.getContent().startsWith("!modulemessage")){
-			sendMessage("Message send! Module is working.", event);
+		if(message.getContent().startsWith("!ping")){
+			sendMessage("Pong!", event);
 		}
 	}
 	
