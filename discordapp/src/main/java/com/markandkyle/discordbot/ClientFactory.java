@@ -5,17 +5,24 @@
  */
 package com.markandkyle.discordbot;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.util.DiscordException;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  *
  * @author mhilliker
  */
 public class ClientFactory {
-    public static IDiscordClient createClient(boolean login) { // Returns a new instance of the Discord client
-        String token = ""; // TODO: get token from file
+    public static IDiscordClient createClient(boolean login) throws IOException { // Returns a new instance of the Discord client
+        ObjectMapper mapper = new ObjectMapper();
+        Config config = mapper.readValue(new File("discordapp/src/config.json"), Config.class);
+        String token = config.getToken();
+        System.out.print(token);
         ClientBuilder clientBuilder = new ClientBuilder(); // Creates the ClientBuilder instance
         clientBuilder.withToken(token); // Adds the login info to the builder
         try {
