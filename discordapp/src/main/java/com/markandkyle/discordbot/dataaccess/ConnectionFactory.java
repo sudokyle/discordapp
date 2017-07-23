@@ -29,6 +29,7 @@ public class ConnectionFactory {
     private static final String CREATE_SESSION_TABLE = "CREATE TABLE IF NOT EXISTS session (\n"
         + "	private_session_id string PRIMARY KEY,\n"
         + "     public_session_id string NOT NULL,\n"
+        + "     name string NOT NULL,\n"
         + "	start_timestamp integer(4) not null default (strftime('%s','now')),\n"
         + "     end_timestamp integer(4),\n"
         + "	options blob\n"
