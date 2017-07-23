@@ -33,6 +33,7 @@ public class MessageHandler {
 
 		IMessage message = event.getMessage();
 		String msg = message.getContent().toLowerCase();
+		System.out.println(message.getAuthor().getLongID());
 
 		if(msg.startsWith("!ping")){
 			sendMessage("Pong!", event);
@@ -48,4 +49,8 @@ public class MessageHandler {
 	public void sendMessage(String message, MessageReceivedEvent event) throws DiscordException, MissingPermissionsException{
 		new MessageBuilder(this.client).appendContent(message).withChannel(event.getMessage().getChannel()).build();
 	}
+
+	public void directMessage(String message,  MessageReceivedEvent event) throws DiscordException, MissingPermissionsException {
+        new MessageBuilder(this.client).appendContent(message).withChannel(event.getMessage().getAuthor().getOrCreatePMChannel()).build();
+    }
 }

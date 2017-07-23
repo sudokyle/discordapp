@@ -23,4 +23,5 @@ public class VoteCommand implements Command {
     public String removeVoteCommand(String msg) {
         return msg.replaceFirst("!vote","");
     }
+
 }
