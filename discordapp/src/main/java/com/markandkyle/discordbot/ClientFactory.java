@@ -20,7 +20,7 @@ import java.io.IOException;
 public class ClientFactory {
     public static IDiscordClient createClient(boolean login) throws IOException { // Returns a new instance of the Discord client
         ObjectMapper mapper = new ObjectMapper();
-        Config config = mapper.readValue(new File("discordapp/src/config.json"), Config.class);
+        Config config = mapper.readValue(new File("src/config.json"), Config.class);
         String token = config.getToken();
         ClientBuilder clientBuilder = new ClientBuilder(); // Creates the ClientBuilder instance
         clientBuilder.withToken(token); // Adds the login info to the builder
