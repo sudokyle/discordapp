@@ -1,9 +1,7 @@
 package com.markandkyle.discordbot.models.commands;
 
 import com.markandkyle.discordbot.MessageHandler;
-import com.markandkyle.discordbot.models.commands.VoteCommand;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
-
 
 /**
  * Created by CptAmerica on 7/22/17.

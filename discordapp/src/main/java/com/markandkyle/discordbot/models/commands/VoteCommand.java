@@ -2,7 +2,6 @@ package com.markandkyle.discordbot.models.commands;
 
 
 import com.markandkyle.discordbot.MessageHandler;
-import com.markandkyle.discordbot.models.commands.Command;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
 /**
@@ -24,7 +23,4 @@ public class VoteCommand implements Command {
     public String removeVoteCommand(String msg) {
         return msg.replaceFirst("!vote","");
     }
-
-    public
-
 }

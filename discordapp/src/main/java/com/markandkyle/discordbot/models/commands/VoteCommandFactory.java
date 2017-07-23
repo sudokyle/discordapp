@@ -1,10 +1,6 @@
 package com.markandkyle.discordbot.models.commands;
 
 import com.markandkyle.discordbot.MessageHandler;
-import com.markandkyle.discordbot.models.commands.CastVoteCommand;
-import com.markandkyle.discordbot.models.commands.EndVoteCommand;
-import com.markandkyle.discordbot.models.commands.StartVoteCommand;
-import com.markandkyle.discordbot.models.commands.VoteCommand;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
 /**
