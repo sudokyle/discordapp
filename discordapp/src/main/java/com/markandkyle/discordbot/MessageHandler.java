@@ -2,8 +2,8 @@ package com.markandkyle.discordbot;
 
 import com.fasterxml.jackson.module.afterburner.util.ClassName;
 import com.markandkyle.discordbot.dataaccess.SessionDAO;
-import com.markandkyle.discordbot.models.VoteCommand;
-import com.markandkyle.discordbot.models.VoteCommandFactory;
+import com.markandkyle.discordbot.models.commands.VoteCommand;
+import com.markandkyle.discordbot.models.commands.VoteCommandFactory;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
@@ -13,7 +13,6 @@ import sx.blah.discord.util.MessageBuilder;
 import sx.blah.discord.util.MissingPermissionsException;
 
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,6 +32,7 @@ public class MessageHandler {
 
 		IMessage message = event.getMessage();
 		String msg = message.getContent().toLowerCase();
+		System.out.println(message.getAuthor().getLongID());
 
 		if(msg.startsWith("!ping")){
 			sendMessage("Pong!", event);
@@ -48,4 +48,8 @@ public class MessageHandler {
 	public void sendMessage(String message, MessageReceivedEvent event) throws DiscordException, MissingPermissionsException{
 		new MessageBuilder(this.client).appendContent(message).withChannel(event.getMessage().getChannel()).build();
 	}
+
+	public void directMessage(String message,  MessageReceivedEvent event) throws DiscordException, MissingPermissionsException {
+        new MessageBuilder(this.client).appendContent(message).withChannel(event.getMessage().getAuthor().getOrCreatePMChannel()).build();
+    }
 }
