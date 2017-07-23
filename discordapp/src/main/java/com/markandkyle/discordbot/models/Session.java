@@ -1,6 +1,7 @@
 package com.markandkyle.discordbot.models;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -31,7 +32,7 @@ public class Session {
     
     // populated after session is complete
     public ArrayList<Vote> votes;
-    
+
     public String[] getOptionList() {
         String[] optionList = options.split(",");
         for(int i=0; i<optionList.length; i++){
