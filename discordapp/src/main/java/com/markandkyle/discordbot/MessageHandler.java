@@ -1,6 +1,7 @@
 package com.markandkyle.discordbot;
 
 import com.fasterxml.jackson.module.afterburner.util.ClassName;
+import com.markandkyle.discordbot.dataaccess.SessionDAO;
 import com.markandkyle.discordbot.models.VoteCommand;
 import com.markandkyle.discordbot.models.VoteCommandFactory;
 import sx.blah.discord.api.IDiscordClient;
@@ -20,9 +21,11 @@ import java.util.logging.Logger;
 public class MessageHandler {
     private static final Logger LOGGER = Logger.getLogger( ClassName.class.getName() );
     private IDiscordClient client;
+    private SessionDAO sessionDAO;
     
     public MessageHandler(IDiscordClient client) {
         this.client = client;
+        this.sessionDAO = new SessionDAO();
     }
 	
 	@EventSubscriber
