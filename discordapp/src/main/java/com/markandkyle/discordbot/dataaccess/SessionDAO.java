@@ -19,7 +19,5 @@ public class SessionDAO {
     public SessionDAO() {
         this.connection = ConnectionFactory.getConnection();
     }
-    
     // TODO: Add classes for storing and getting session
-    
 }
