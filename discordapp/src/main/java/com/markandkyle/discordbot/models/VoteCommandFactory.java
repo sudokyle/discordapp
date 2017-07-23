@@ -1,5 +1,8 @@
 package com.markandkyle.discordbot.models;
 
+import com.markandkyle.discordbot.MessageHandler;
+import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
+
 import java.util.ArrayList;
 
 /**
@@ -11,11 +14,11 @@ public class VoteCommandFactory {
     public static final String CAST = "cast";
     public static final String END = "end";
 
-    public static VoteCommand createCommand(String subCommand) {
+    public static VoteCommand createCommand(String subCommand, MessageHandler handler, MessageReceivedEvent event) {
         VoteCommand voteCommand = null;
-        if(subCommand.equalsIgnoreCase(START)) voteCommand = new StartVoteCommand();
-        else if(subCommand.equalsIgnoreCase(CAST)) voteCommand = new CastVoteCommand();
-        else if(subCommand.equalsIgnoreCase(END)) voteCommand = new EndVoteCommand();
+        if(subCommand.equalsIgnoreCase(START)) voteCommand = new StartVoteCommand(handler, event);
+        else if(subCommand.equalsIgnoreCase(CAST)) voteCommand = new CastVoteCommand(handler, event);
+        else if(subCommand.equalsIgnoreCase(END)) voteCommand = new EndVoteCommand(handler, event);
         return voteCommand;
     }
 }
