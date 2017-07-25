@@ -9,16 +9,22 @@ import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedE
  */
 public class EndVoteCommand extends VoteCommand {
 
+    private String sessionId;
+
     EndVoteCommand(MessageHandler handler, MessageReceivedEvent event) {
         super(handler, event);
     }
 
     @Override
     public void execute(String message) {
-        msgHandler.sendMessage("End Vote Command Created! Content: " + removeEndCommand(message), event);
+        interpret(message);
+        msgHandler.sendMessage("End Vote Command Created! Private sessionid: " + this.sessionId, event);
     }
 
-    public String removeEndCommand(String msg){
-        return removeVoteCommand(msg).replaceFirst("end","");
+    @Override
+    public void interpret(String message) {
+        this.sessionId = sessionIdParser(message);
     }
+
+    private void closeSession() {}
 }

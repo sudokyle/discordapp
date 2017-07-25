@@ -34,6 +34,11 @@ public class StartVoteCommand extends VoteCommand {
         this.options = optionSelectionParser(message);
     }
 
+    /**
+     * The message to be sent in the channel where this command was called.
+     * @param sesh the the new session made by this vote command.
+     * @return
+     */
     private String publicMessage(Session sesh) {
         StringBuilder sb = new StringBuilder();
         for(int i=0; i < sesh.getOptionList().length; i++) {
@@ -48,6 +53,11 @@ public class StartVoteCommand extends VoteCommand {
 
     }
 
+    /**
+     * Generates the private message to be sent to the user who sent the start vote command.
+     * @param sesh the instance of the new voting session created.
+     * @return the message to be sent to the user who sent the start vote command.
+     */
     private String privateMessage(Session sesh) {
         StringBuilder sb = new StringBuilder();
         for(int i=0; i < sesh.getOptionList().length; i++) {
@@ -60,6 +70,11 @@ public class StartVoteCommand extends VoteCommand {
 
     }
 
+    /**
+     * Parses the Command message for the name of the new Voting session.
+     * @param msg the Command message to parse.
+     * @return the Name of the new voting session.
+     */
     private String sessionNameParser(String msg) {
         boolean EON = false;
         int double_qoute_count = 0;
@@ -78,6 +93,11 @@ public class StartVoteCommand extends VoteCommand {
         return sb.toString();
     }
 
+    /**
+     * Parses the Command message to grab the options that users can vote for in the new session.
+     * @param msg the Command message to parse.
+     * @return the list of options that can be voted for.
+     */
     private String[] optionSelectionParser(String msg) {
         int i=0;
         int quotes=0;
@@ -92,4 +112,10 @@ public class StartVoteCommand extends VoteCommand {
         }
         return selections;
     }
+
+    /**
+     * Writes the session to the database.
+     * @param session session to store in db.
+     */
+    private void storeNewSession(Session session) {}
 }

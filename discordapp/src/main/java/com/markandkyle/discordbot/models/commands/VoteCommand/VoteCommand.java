@@ -26,7 +26,12 @@ public class VoteCommand implements Command {
         return msg.replaceFirst("!vote","").trim();
     }
 
-    public String getSessionId(String message) {
-        return message.trim().split(" ")[0];
+    /**
+     * Gets the session id passed into any vote command.
+     * @param message
+     * @return
+     */
+    public String sessionIdParser(String message) {
+        return message.trim().split(" ")[2];
     }
 }
