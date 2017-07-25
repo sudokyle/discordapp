@@ -5,4 +5,5 @@ package com.markandkyle.discordbot.models.commands;
  */
 public interface Command {
     public void execute(String message);
+    public void interpret(String message);
 }

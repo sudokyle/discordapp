@@ -2,8 +2,8 @@ package com.markandkyle.discordbot;
 
 import com.fasterxml.jackson.module.afterburner.util.ClassName;
 import com.markandkyle.discordbot.dataaccess.SessionDAO;
-import com.markandkyle.discordbot.models.commands.VoteCommand;
-import com.markandkyle.discordbot.models.commands.VoteCommandFactory;
+import com.markandkyle.discordbot.models.commands.VoteCommand.VoteCommand;
+import com.markandkyle.discordbot.models.commands.VoteCommand.VoteCommandFactory;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
