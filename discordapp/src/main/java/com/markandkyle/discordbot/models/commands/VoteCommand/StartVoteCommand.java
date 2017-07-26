@@ -1,15 +1,16 @@
-package com.markandkyle.discordbot.models.commands;
+package com.markandkyle.discordbot.models.commands.VoteCommand;
 
 import com.markandkyle.discordbot.MessageHandler;
 import com.markandkyle.discordbot.models.Session;
+import com.markandkyle.discordbot.models.commands.VoteCommand.VoteCommand;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
-
-import java.util.UUID;
 
 /**
  * Created by CptAmerica on 7/22/17.
  */
 public class StartVoteCommand extends VoteCommand {
+    private String name;
+    private String[] options;
 
     StartVoteCommand(MessageHandler handler, MessageReceivedEvent event) {
         super(handler, event);
@@ -17,11 +18,8 @@ public class StartVoteCommand extends VoteCommand {
 
     @Override
     public void execute(String message) {
-        String content = removeStartCommand(message);
-        String name = getSessionName(content);
-        content = removeName(name, content);
-        String[] options = optionSelectionParser(content);
-        Session sesh = buildVotingSesh(name, options);
+        interpret(message);
+        Session sesh = new Session(name, options);
 
         //Message Handling
         //Public Message:
@@ -30,7 +28,18 @@ public class StartVoteCommand extends VoteCommand {
         msgHandler.directMessage(privateMessage(sesh), event);
     }
 
-    public String publicMessage(Session sesh) {
+    @Override
+    public void interpret(String message) {
+        this.name = sessionNameParser(message);
+        this.options = optionSelectionParser(message);
+    }
+
+    /**
+     * The message to be sent in the channel where this command was called.
+     * @param sesh the the new session made by this vote command.
+     * @return
+     */
+    private String publicMessage(Session sesh) {
         StringBuilder sb = new StringBuilder();
         for(int i=0; i < sesh.getOptionList().length; i++) {
             sb.append(sesh.getOptionList()[i]+": "+(i+1)+"\n");
@@ -44,7 +53,12 @@ public class StartVoteCommand extends VoteCommand {
 
     }
 
-    public String privateMessage(Session sesh) {
+    /**
+     * Generates the private message to be sent to the user who sent the start vote command.
+     * @param sesh the instance of the new voting session created.
+     * @return the message to be sent to the user who sent the start vote command.
+     */
+    private String privateMessage(Session sesh) {
         StringBuilder sb = new StringBuilder();
         for(int i=0; i < sesh.getOptionList().length; i++) {
             sb.append(sesh.getOptionList()[i]+": "+(i+1)+"\n");
@@ -56,19 +70,12 @@ public class StartVoteCommand extends VoteCommand {
 
     }
 
-    public String removeStartCommand(String msg){
-        return removeVoteCommand(msg).replaceFirst("start","").trim();
-    }
-
-    private String removeName(String name, String msg) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\"");
-        sb.append(name);
-        sb.append("\"");
-        return msg.replaceFirst(sb.toString(), "");
-    }
-
-    public String getSessionName(String msg){
+    /**
+     * Parses the Command message for the name of the new Voting session.
+     * @param msg the Command message to parse.
+     * @return the Name of the new voting session.
+     */
+    private String sessionNameParser(String msg) {
         boolean EON = false;
         int double_qoute_count = 0;
         int i=0;
@@ -86,24 +93,29 @@ public class StartVoteCommand extends VoteCommand {
         return sb.toString();
     }
 
+    /**
+     * Parses the Command message to grab the options that users can vote for in the new session.
+     * @param msg the Command message to parse.
+     * @return the list of options that can be voted for.
+     */
     private String[] optionSelectionParser(String msg) {
-        String[] selections = msg.trim().split(",");
+        int i=0;
+        int quotes=0;
+        while( (i < msg.length()) && (quotes < 2)){
+            if(msg.charAt(i) == '"') quotes++;
+            i++;
+        }
+        String options = msg.substring(i);
+        String[] selections = options.trim().split(",");
         for(int s=0; s < selections.length; s++) {
             selections[s] = selections[s].trim();
         }
         return selections;
     }
 
-    private Session buildVotingSesh(String name, String[] options) {
-        //get time
-        Session sesh = new Session();
-        sesh.startTime = ""+System.currentTimeMillis();
-        UUID public_id = UUID.randomUUID();
-        UUID private_id = UUID.randomUUID();
-        sesh.name = name;
-        sesh.publicSessionID = public_id.toString().substring(0,5);
-        sesh.privateSessionID = private_id.toString().substring(0,5);
-        sesh.setOptionsFromList(options);
-        return sesh;
-    }
+    /**
+     * Writes the session to the database.
+     * @param session session to store in db.
+     */
+    private void storeNewSession(Session session) {}
 }

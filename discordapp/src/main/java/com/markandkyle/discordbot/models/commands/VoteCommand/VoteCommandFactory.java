@@ -1,4 +1,4 @@
-package com.markandkyle.discordbot.models.commands;
+package com.markandkyle.discordbot.models.commands.VoteCommand;
 
 import com.markandkyle.discordbot.MessageHandler;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
