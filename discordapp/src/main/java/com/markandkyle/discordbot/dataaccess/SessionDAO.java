@@ -3,6 +3,7 @@ package com.markandkyle.discordbot.dataaccess;
 import com.markandkyle.discordbot.models.Session;
 
 import java.sql.*;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,13 +44,53 @@ public class SessionDAO {
             result.startTime = rs.getString("start_timestamp");
             result.endTime = rs.getString("end_timestamp");
             result.options = rs.getString("options");
-
-            // TODO: get votes from the session
+            rs.close();
+            stmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(SessionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        // get the corresponding votes
+        try {
+            Statement stmt = connection.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        
 
         return result;
+    }
+    
+    public String getPrivateId(String publicId) {
+
+        String query = "SELECT private_session_id,start_timestamp FROM session"
+                + " WHERE public_session_id=" + publicId + "" // add limit to 24 hrs
+                + " ORDER BY start_timestamp DESC";
+        
+        String key = null;
+        try {
+            Statement stmt = this.connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            key  = rs.getString("private_session_id");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return key;
+    }
+    
+    @Override
+    public void finalize() {
+        try {
+            this.connection.close();
+            super.finalize();
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Throwable ex) {
+            Logger.getLogger(SessionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
