@@ -38,12 +38,14 @@ public class SessionDAO {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sessionQuery);
-            result.publicSessionID = rs.getString("public_session_id");
-            result.privateSessionID = rs.getString("private_session_id");
-            result.name = rs.getString("name");
-            result.startTime = rs.getString("start_timestamp");
-            result.endTime = rs.getString("end_timestamp");
-            result.options = rs.getString("options");
+            if(rs.next()) {
+                result.publicSessionID = rs.getString("public_session_id");
+                result.privateSessionID = rs.getString("private_session_id");
+                result.name = rs.getString("name");
+                result.startTime = rs.getString("start_timestamp");
+                result.endTime = rs.getString("end_timestamp");
+                result.options = rs.getString("options");
+            }
             rs.close();
             stmt.close();
         } catch (SQLException ex) {
@@ -72,7 +74,9 @@ public class SessionDAO {
         try {
             Statement stmt = this.connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            key  = rs.getString("private_session_id");
+            if(rs.next()) {
+                key  = rs.getString("private_session_id");
+            }
             
         } catch (SQLException ex) {
             Logger.getLogger(SessionDAO.class.getName()).log(Level.SEVERE, null, ex);
