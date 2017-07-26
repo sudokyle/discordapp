@@ -88,7 +88,9 @@ public class SessionDAO {
     @Override
     public void finalize() {
         try {
-            this.connection.close();
+            if(this.connection != null) {
+                this.connection.close();
+            }
             super.finalize();
         } catch (SQLException ex) {
             Logger.getLogger(SessionDAO.class.getName()).log(Level.SEVERE, null, ex);
