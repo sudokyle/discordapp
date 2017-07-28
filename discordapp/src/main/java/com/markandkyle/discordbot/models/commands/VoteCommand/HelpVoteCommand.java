@@ -10,4 +10,14 @@ public class HelpVoteCommand extends VoteCommand {
     HelpVoteCommand(MessageHandler handler, MessageReceivedEvent event) {
         super(handler, event);
     }
+
+    @Override
+    public void execute(String message) {
+
+    }
+
+    @Override
+    public void interpret(String message) {
+        
+    }
 }
