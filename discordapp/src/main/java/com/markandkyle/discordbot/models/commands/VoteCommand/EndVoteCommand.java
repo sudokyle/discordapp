@@ -55,5 +55,5 @@ public class EndVoteCommand extends VoteCommand {
         session.endTime = ""+System.currentTimeMillis();
         sessionDAO.updateSession(session);
     }
-    
+
 }
