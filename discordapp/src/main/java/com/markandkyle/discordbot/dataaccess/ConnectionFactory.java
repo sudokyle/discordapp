@@ -32,30 +32,28 @@ public class ConnectionFactory {
         + "     name string NOT NULL,\n"
         + "	start_timestamp integer(4) not null default (strftime('%s','now')),\n"
         + "     end_timestamp integer(4),\n"
-        + "	options blob\n"
+        + "	options string NOT NULL\n"
         + ");";
     
-    public static Connection getConnection() {
- 
+    public static Connection getConnection(String db_name) {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SessionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String url = "jdbc:sqlite:session.db";
+        String url = "jdbc:sqlite:"+db_name+".db";
         
         // try to create the database first if it does not exist
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());
-                System.out.println("A new database has been created.");        
+                System.out.println("A new database has been created.");
             }
- 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        
+
         // then create a connection to the database and return it
         Connection con = null;
         try{

@@ -9,25 +9,10 @@ import java.util.logging.Logger;
  *
  * @author mhilliker
  */
-public class VoteDAO {
+public class VoteDAO extends DataAccess {
     
     private Connection connection;
     
-    public VoteDAO() {
-        this.connection = ConnectionFactory.getConnection();
-    }
-    
-     @Override
-    public void finalize() {
-        try {
-            if(this.connection != null) {
-                this.connection.close();
-            }
-            super.finalize();
-        } catch (SQLException ex) {
-            Logger.getLogger(SessionDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Throwable ex) {
-            Logger.getLogger(SessionDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    public VoteDAO() {super(Databases.VOTE_COMMAND_SESSION);}
+
 }

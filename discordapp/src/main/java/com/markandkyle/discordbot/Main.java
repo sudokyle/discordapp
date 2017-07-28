@@ -1,5 +1,7 @@
 package com.markandkyle.discordbot;
 
+import com.markandkyle.discordbot.dataaccess.SessionDAO;
+import com.markandkyle.discordbot.models.Session;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventDispatcher;
 import java.io.IOException;
