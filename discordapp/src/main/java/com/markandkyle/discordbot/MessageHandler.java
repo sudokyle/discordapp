@@ -2,7 +2,9 @@ package com.markandkyle.discordbot;
 
 import com.fasterxml.jackson.module.afterburner.util.ClassName;
 import com.markandkyle.discordbot.dataaccess.SessionDAO;
+import com.markandkyle.discordbot.models.commands.Command;
 import com.markandkyle.discordbot.models.commands.VoteCommand.*;
+import org.sqlite.core.DB;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
@@ -27,23 +29,15 @@ public class MessageHandler {
 	
 	@EventSubscriber
 	public void OnMesageEvent(MessageReceivedEvent event) throws DiscordException, MissingPermissionsException{
-            this.sessionDAO = new SessionDAO();
-            IMessage message = event.getMessage();
-            String msg = message.getContent().toLowerCase();
-            System.out.println(message.getAuthor().getLongID());
+        //Process Message
+        IMessage message = event.getMessage();
+        String msg = message.getContent().toLowerCase();
+        System.out.println(message.getAuthor().getLongID());
 
-            if(msg.startsWith("!ping")){
-                    sendMessage("Pong!", event);
-            }else if(msg.startsWith("!vote")){
-                LOGGER.log(Level.INFO, "Vote Command Detected.");
-                String[] commands = msg.split(" ");
-                VoteCommand voteCommand = VoteCommandFactory.createCommand(commands[1], this, event);
-                LOGGER.log(Level.INFO, "Vote Command Type: "+ voteCommand.getClass());
-                voteCommand.execute(message.getContent());
-            }
-            
-            // close off the connection
-            this.sessionDAO.finalize();
+        //Get and Execute Command:
+        DB127 db127 = DB127.getInstance();
+        Command command = db127.getCommandFactory().build(msg, event);
+        command.execute(msg);
 	}
 	
 	public void sendMessage(String message, MessageReceivedEvent event) throws DiscordException, MissingPermissionsException{

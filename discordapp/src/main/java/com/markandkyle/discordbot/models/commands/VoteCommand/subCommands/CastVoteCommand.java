@@ -1,4 +1,4 @@
-package com.markandkyle.discordbot.models.commands.VoteCommand;
+package com.markandkyle.discordbot.models.commands.VoteCommand.subCommands;
 
 import com.markandkyle.discordbot.MessageHandler;
 import com.markandkyle.discordbot.models.Session;
@@ -16,7 +16,7 @@ public class CastVoteCommand extends VoteCommand {
     private String sessionId;
     private String[] options;
 
-    CastVoteCommand(MessageHandler handler, MessageReceivedEvent event){
+    public CastVoteCommand(MessageHandler handler, MessageReceivedEvent event){
         super(handler, event);
     }
 
