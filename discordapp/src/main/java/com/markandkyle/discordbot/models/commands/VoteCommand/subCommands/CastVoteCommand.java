@@ -8,9 +8,6 @@ import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedE
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-/**
- * Created by CptAmerica on 7/22/17.
- */
 public class CastVoteCommand extends VoteCommand {
 
     private String sessionId;

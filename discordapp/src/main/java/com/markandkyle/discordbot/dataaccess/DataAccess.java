@@ -8,9 +8,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by CptAmerica on 7/27/17.
- */
 public class DataAccess {
     protected Connection connection;
 

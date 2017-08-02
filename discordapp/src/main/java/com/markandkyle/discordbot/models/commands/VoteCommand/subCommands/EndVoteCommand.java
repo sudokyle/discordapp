@@ -6,9 +6,6 @@ import com.markandkyle.discordbot.models.Session;
 import com.markandkyle.discordbot.models.commands.VoteCommand.VoteCommand;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
-/**
- * Created by CptAmerica on 7/22/17.
- */
 public class EndVoteCommand extends VoteCommand {
 
     private String sessionId;

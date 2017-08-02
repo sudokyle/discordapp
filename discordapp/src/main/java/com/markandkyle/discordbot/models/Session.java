@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
-/**
- *
- * @author mhilliker
- */
 public class Session {
      /*
         public_session_id string,

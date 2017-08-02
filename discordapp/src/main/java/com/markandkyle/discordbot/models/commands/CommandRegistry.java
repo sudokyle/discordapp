@@ -2,9 +2,6 @@ package com.markandkyle.discordbot.models.commands;
 
 import java.util.HashMap;
 
-/**
- * Created by CptAmerica on 7/28/17.
- */
 public class CommandRegistry {
 
     protected HashMap<String, CommandFactory> registry;

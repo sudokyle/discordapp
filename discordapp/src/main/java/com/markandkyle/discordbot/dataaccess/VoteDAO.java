@@ -5,10 +5,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author mhilliker
- */
 public class VoteDAO extends DataAccess {
     
     private Connection connection;

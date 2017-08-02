@@ -7,9 +7,6 @@ import com.markandkyle.discordbot.models.Session;
 import com.markandkyle.discordbot.models.commands.Command;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
-/**
- * Created by CptAmerica on 7/22/17.
- */
 public class VoteCommand extends Command {
     protected MessageHandler msgHandler;
     protected MessageReceivedEvent event;

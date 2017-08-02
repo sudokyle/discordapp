@@ -1,9 +1,5 @@
 package com.markandkyle.discordbot.models;
 
-/**
- *
- * @author mhilliker
- */
 public class Vote {
     /*
         vote_id int primary key,

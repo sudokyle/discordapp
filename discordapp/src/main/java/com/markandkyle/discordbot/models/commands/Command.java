@@ -1,8 +1,5 @@
 package com.markandkyle.discordbot.models.commands;
 
-/**
- * Created by CptAmerica on 7/28/17.
- */
 public class Command implements AbstractCommand {
 
     protected String commmand_key;

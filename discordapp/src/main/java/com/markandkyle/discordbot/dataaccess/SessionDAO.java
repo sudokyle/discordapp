@@ -12,10 +12,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * TODO: make queries safely
- * @author mhilliker
- */
 public class SessionDAO extends DataAccess {
 
     private final String PUBLIC_SESSION_ID = "public_session_id";

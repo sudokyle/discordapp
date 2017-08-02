@@ -10,9 +10,6 @@ import com.markandkyle.discordbot.models.commands.VoteCommand.subCommands.EndVot
 import com.markandkyle.discordbot.models.commands.VoteCommand.subCommands.StartVoteCommand;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
-/**
- * Created by CptAmerica on 7/22/17.
- */
 public class VoteCommandFactory extends CommandFactory {
 
     public VoteCommandFactory() {
@@ -26,13 +23,7 @@ public class VoteCommandFactory extends CommandFactory {
     @Override
     public Command build(String subCommand, MessageHandler handler ,MessageReceivedEvent event) {
         CommandFactory subCommandFactory = this.getCommandRegistry().getCommandFactory(subCommand);
-        return subCommandFactory.build(event);
-    }
-
-    @Override
-    public Command build(String subCommand, MessageReceivedEvent event) {
-        CommandFactory subCommandFactory = this.getCommandRegistry().getCommandFactory(subCommand);
-        return subCommandFactory.build(event);
+        return subCommandFactory.build(handler, event);
     }
 
     private class StartVoteCommandFactory extends CommandFactory {
@@ -42,8 +33,8 @@ public class VoteCommandFactory extends CommandFactory {
         }
 
         @Override
-        public Command build(MessageReceivedEvent event) {
-            return new StartVoteCommand(DB127.getInstance().msgHandler, event);
+        public Command build(MessageHandler handler, MessageReceivedEvent event) {
+            return new StartVoteCommand(handler, event);
         }
     }
     private class CastVoteCommandFactory extends CommandFactory {
@@ -51,8 +42,8 @@ public class VoteCommandFactory extends CommandFactory {
             this.command_key = "cast";
         }
         @Override
-        public Command build(MessageReceivedEvent event) {
-            return new CastVoteCommand(DB127.getInstance().msgHandler, event);
+        public Command build(MessageHandler handler, MessageReceivedEvent event) {
+            return new CastVoteCommand(handler, event);
         }
     }
     private class EndVoteCommandFactory extends CommandFactory {
@@ -60,8 +51,8 @@ public class VoteCommandFactory extends CommandFactory {
             this.command_key = "end";
         }
         @Override
-        public Command build(MessageReceivedEvent event) {
-            return new EndVoteCommand(DB127.getInstance().msgHandler, event);
+        public Command build(MessageHandler handler, MessageReceivedEvent event) {
+            return new EndVoteCommand(handler, event);
         }
     }
 }

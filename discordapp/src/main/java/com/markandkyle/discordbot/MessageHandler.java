@@ -36,7 +36,7 @@ public class MessageHandler {
 
         //Get and Execute Command:
         DB127 db127 = DB127.getInstance();
-        Command command = db127.getCommandFactory().build(msg, event);
+        Command command = db127.getCommandFactory().build(msg, this, event);
         command.execute(msg);
 	}
 	

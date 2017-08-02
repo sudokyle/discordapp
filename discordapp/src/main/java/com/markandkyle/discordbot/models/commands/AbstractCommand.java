@@ -1,8 +1,5 @@
 package com.markandkyle.discordbot.models.commands;
 
-/**
- * Created by CptAmerica on 7/28/17.
- */
 public interface AbstractCommand {
         /**
          * The Functionality of a Command to be executed.
