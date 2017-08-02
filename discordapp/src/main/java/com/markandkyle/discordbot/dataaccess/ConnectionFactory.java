@@ -13,10 +13,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author mhilliker
- */
 public class ConnectionFactory {
 
     private static final String CREATE_VOTE_TABLE = "CREATE TABLE IF NOT EXISTS vote (\n"

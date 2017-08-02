@@ -1,4 +1,4 @@
-package com.markandkyle.discordbot.models.commands.VoteCommand;
+package com.markandkyle.discordbot.models.commands.VoteCommand.subCommands;
 
 import com.markandkyle.discordbot.MessageHandler;
 import com.markandkyle.discordbot.models.Session;
@@ -8,15 +8,12 @@ import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedE
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-/**
- * Created by CptAmerica on 7/22/17.
- */
 public class CastVoteCommand extends VoteCommand {
 
     private String sessionId;
     private String[] options;
 
-    CastVoteCommand(MessageHandler handler, MessageReceivedEvent event){
+    public CastVoteCommand(MessageHandler handler, MessageReceivedEvent event){
         super(handler, event);
     }
 

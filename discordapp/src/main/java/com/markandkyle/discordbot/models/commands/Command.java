@@ -1,19 +1,21 @@
 package com.markandkyle.discordbot.models.commands;
 
-/**
- * Created by CptAmerica on 7/22/17.
- */
-public interface Command {
+public class Command implements AbstractCommand {
 
-    /**
-     * The Functionality of a Command to be executed.
-     * @param message the command message to execute.
-     */
-    public void execute(String message);
+    protected String commmand_key;
 
-    /**
-     * A function which parses a command's input.
-     * @param message the command message to be parsed.
-     */
-    public void interpret(String message);
+
+    public String getCommandKey() {
+        return this.commmand_key;
+    }
+
+    @Override
+    public void execute(String message) {
+
+    }
+
+    @Override
+    public void interpret(String message) {
+
+    }
 }

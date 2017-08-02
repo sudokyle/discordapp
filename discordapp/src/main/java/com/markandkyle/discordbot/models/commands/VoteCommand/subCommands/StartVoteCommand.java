@@ -1,25 +1,22 @@
-package com.markandkyle.discordbot.models.commands.VoteCommand;
+package com.markandkyle.discordbot.models.commands.VoteCommand.subCommands;
 
 import com.markandkyle.discordbot.MessageHandler;
-import com.markandkyle.discordbot.dataaccess.SessionDAO;
 import com.markandkyle.discordbot.models.Session;
+import com.markandkyle.discordbot.models.commands.VoteCommand.VoteCommand;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
-/**
- * Created by CptAmerica on 7/22/17.
- */
 public class StartVoteCommand extends VoteCommand {
     private String name;
     private String[] options;
 
-    StartVoteCommand(MessageHandler handler, MessageReceivedEvent event) {
+    public StartVoteCommand(MessageHandler handler, MessageReceivedEvent event) {
         super(handler, event);
     }
 
     @Override
     public void execute(String message) {
         interpret(message);
-        session = new Session(name, options);
+        this.session = new Session(name, options);
         storeNewSession(session);
 
         //Message Handling

@@ -7,24 +7,18 @@ import com.markandkyle.discordbot.models.Session;
 import com.markandkyle.discordbot.models.commands.Command;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
-/**
- * Created by CptAmerica on 7/22/17.
- */
-public class VoteCommand implements Command {
-    MessageHandler msgHandler;
-    MessageReceivedEvent event;
-    SessionDAO sessionDAO;
-    Session session;
+public class VoteCommand extends Command {
+    protected MessageHandler msgHandler;
+    protected MessageReceivedEvent event;
+    protected SessionDAO sessionDAO;
+    protected Session session;
 
-    VoteCommand(MessageHandler handler, MessageReceivedEvent event) {
+    public VoteCommand(MessageHandler handler, MessageReceivedEvent event) {
         this.msgHandler = handler;
         this.event = event;
         sessionDAO = new SessionDAO();
+        this.commmand_key = "vote";
     }
-
-    public void execute(String message) {}
-
-    public void interpret(String message) {}
 
     public String removeVoteCommand(String msg) {
         return msg.replaceFirst("!vote","").trim();
